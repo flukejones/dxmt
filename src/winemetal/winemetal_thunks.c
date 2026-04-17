@@ -1232,3 +1232,11 @@ MTLCommandQueue_addResidencySet(obj_handle_t queue, obj_handle_t residency_set) 
   params.arg = residency_set;
   UNIX_CALL(137, &params);
 }
+
+WINEMETAL_API void
+MTLTexture_getInfo(obj_handle_t texture, struct WMTTextureInfo *info) {
+  struct unixcall_generic_obj_ptr_noret params;
+  params.handle = texture;
+  WMT_MEMPTR_SET(params.arg, info);
+  UNIX_CALL(138, &params);
+}

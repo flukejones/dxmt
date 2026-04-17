@@ -1985,4 +1985,6 @@ WINEMETAL_API void MTLResidencySet_commit(obj_handle_t residency_set);
 
 WINEMETAL_API void MTLCommandQueue_addResidencySet(obj_handle_t queue, obj_handle_t residency_set);
 
+WINEMETAL_API void MTLTexture_getInfo(obj_handle_t texture, struct WMTTextureInfo *info);
+
 #endif

@@ -529,6 +529,19 @@ ImportSharedTextureInternal(
   return device_texture->QueryInterface(riid, ppTexture);
 }
 
+/* sRGB and non-sRGB are views of one typeless parent; compare bases. */
+static WMTPixelFormat
+strip_srgb(WMTPixelFormat format) {
+  switch (format) {
+  case WMTPixelFormatRGBA8Unorm_sRGB:
+    return WMTPixelFormatRGBA8Unorm;
+  case WMTPixelFormatBGRA8Unorm_sRGB:
+    return WMTPixelFormatBGRA8Unorm;
+  default:
+    return format;
+  }
+}
+
 HRESULT
 ImportMTLTexture2D(
     MTLD3D11Device *pDevice, const D3D11_TEXTURE2D_DESC1 *pDesc, uint64_t mtlTexture, ID3D11Texture2D **ppTexture2D
@@ -559,7 +572,8 @@ ImportMTLTexture2D(
       expectedInfo.mipmap_level_count != mtlInfo.mipmap_level_count ||
       expectedInfo.array_length != mtlInfo.array_length || expectedInfo.sample_count != mtlInfo.sample_count ||
       expectedInfo.type != mtlInfo.type ||
-      ORIGINAL_FORMAT(expectedInfo.pixel_format) != ORIGINAL_FORMAT(mtlInfo.pixel_format)) {
+      strip_srgb((WMTPixelFormat)ORIGINAL_FORMAT(expectedInfo.pixel_format)) !=
+          strip_srgb((WMTPixelFormat)ORIGINAL_FORMAT(mtlInfo.pixel_format))) {
     ERR("ImportMTLTexture2D: texture property mismatch");
     return E_INVALIDARG;
   }

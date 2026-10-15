@@ -4,6 +4,8 @@
 
 namespace dxmt {
 
+constexpr GUID IID_MTLD3D11Fence = guid::make_guid("e43100ac-1d19-4fc6-9833-87a532ae0722");
+
 struct MTLD3D11Fence : public ID3D11Fence {
   WMT::Reference<WMT::SharedEvent> event;
   D3DKMT_HANDLE local_kmt = 0;

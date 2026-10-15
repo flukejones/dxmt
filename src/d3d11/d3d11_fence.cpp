@@ -28,8 +28,8 @@ public:
 
     *ppvObject = nullptr;
 
-    if (riid == __uuidof(IUnknown) || riid == __uuidof(ID3D11DeviceChild) ||
-        riid == __uuidof(ID3D11Fence)) {
+    if (riid == __uuidof(IUnknown) || riid == __uuidof(ID3D11DeviceChild) || riid == __uuidof(ID3D11Fence) ||
+        riid == IID_MTLD3D11Fence) {
       *ppvObject = ref(this);
       return S_OK;
     }

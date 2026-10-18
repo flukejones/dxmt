@@ -55,3 +55,8 @@ DEFINE_COM_INTERFACE("8b6fc874-7429-430d-8253-522e296cd8e2", IMTLD3D11InteropDev
   // A writable output is cleared on failure.
   virtual HRESULT STDMETHODCALLTYPE GetFenceSharedEvent(ID3D11Fence * pFence, uint64_t *pMtlSharedEvent) = 0;
 };
+
+DEFINE_COM_INTERFACE("cd310930-fc58-4a35-aa51-2065e37a83e7", IMTLD3D11InteropDevice1) : public IMTLD3D11InteropDevice {
+  // Returns a borrowed Metal device; keep this COM device alive or retain the native object.
+  virtual HRESULT STDMETHODCALLTYPE GetMetalDevice(uint64_t *pMtlDevice) = 0;
+};

@@ -5,6 +5,14 @@
 namespace dxmt {
 
 HRESULT STDMETHODCALLTYPE
+MTLD3D11InteropDevice::GetMetalDevice(uint64_t *pMtlDevice) {
+  if (!pMtlDevice)
+    return E_POINTER;
+  *pMtlDevice = device_->GetMTLDevice().handle;
+  return S_OK;
+}
+
+HRESULT STDMETHODCALLTYPE
 MTLD3D11InteropDevice::ImportMTLTexture2D(
     const D3D11_TEXTURE2D_DESC1 *pDesc, uint64_t mtlTexture, ID3D11Texture2D **ppTexture2D
 ) {

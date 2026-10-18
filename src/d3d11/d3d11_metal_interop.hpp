@@ -5,7 +5,7 @@
 
 namespace dxmt {
 
-class MTLD3D11InteropDevice : public IMTLD3D11InteropDevice {
+class MTLD3D11InteropDevice : public IMTLD3D11InteropDevice1 {
 public:
   MTLD3D11InteropDevice(IUnknown *container, MTLD3D11Device *device) : container_(container), device_(device) {}
 
@@ -27,6 +27,8 @@ public:
   ) final;
 
   HRESULT STDMETHODCALLTYPE GetFenceSharedEvent(ID3D11Fence *pFence, uint64_t *pMtlSharedEvent) final;
+
+  HRESULT STDMETHODCALLTYPE GetMetalDevice(uint64_t *pMtlDevice) final;
 
 private:
   IUnknown *container_;

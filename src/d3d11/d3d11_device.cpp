@@ -1204,6 +1204,11 @@ public:
       return S_OK;
     }
 
+    if (riid == __uuidof(IMTLD3D11InteropDevice1)) {
+      *ppvObject = ref_and_cast<IMTLD3D11InteropDevice1>(&d3d11_interop_device_);
+      return S_OK;
+    }
+
     if (riid == __uuidof(ID3D11Multithread)) {
       *ppvObject = ref_and_cast<ID3D11Multithread>(&d3d11_device_.d3dmt_);
       return S_OK;
